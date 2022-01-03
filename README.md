@@ -1,4 +1,4 @@
-# ELS
+# ELS快递物流系统（Express logistics system）
 ![GitHub Repo stars](https://img.shields.io/github/stars/ashlee618/ELS?style=social)
 
 ![GitHub](https://img.shields.io/github/license/ashlee618/ELS)

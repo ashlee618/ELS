@@ -35,7 +35,8 @@ public class LogisticsOrderItemController {
      * @param item
      * @return
      */
-    @PostMapping("orderItem")
+    @PostMapping("/v1/orderItem")
+    @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO creatOrderItem (@RequestBody LogisticsOrderItem item){
         ResultVO result = new ResultVO();
         result.setCode(200);
@@ -56,8 +57,8 @@ public class LogisticsOrderItemController {
      * @param id
      * @return
      */
-    @GetMapping("/orderItem")
-    public ResultVO getOrder(@RequestParam("id") String id){
+    @GetMapping("/v1/orderItem/{id}")
+    public ResultVO getOrder(@PathVariable("id") long id){
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(200);
         resultVO.setData(service.getById(id));
@@ -69,8 +70,9 @@ public class LogisticsOrderItemController {
      * @param id
      * @return
      */
-    @DeleteMapping("/orderItem")
-    public ResultVO deleteOrder(@RequestParam("id") String id){
+    @DeleteMapping("/v1/orderItem/{id}")
+    @Transactional(rollbackFor = RuntimeException.class)
+    public ResultVO deleteOrder(@PathVariable("id") long id){
         ResultVO result = new ResultVO();
         result.setCode(200);
         boolean delete = false;
@@ -90,7 +92,8 @@ public class LogisticsOrderItemController {
      * @param item
      * @return
      */
-    @PutMapping("/orderItem")
+    @PutMapping("/v1/orderItem")
+    @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO updateOrder(@RequestBody LogisticsOrderItem item){
         ResultVO result = new ResultVO();
         result.setCode(200);

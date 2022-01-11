@@ -27,10 +27,6 @@ import java.sql.ResultSet;
 @RequestMapping("/logistics-order")
 public class LogisticsOrderController {
     @Autowired
-    public TransactionTemplate transactionTemplate;
-
-
-    @Autowired
     public LogisticsOrderServiceImpl service;
 
     public static final Logger logger = LoggerFactory.getLogger(LogisticsOrderController.class);
@@ -40,6 +36,8 @@ public class LogisticsOrderController {
      * @return
      */
     @PostMapping("/v1/order")
+    @Transactional(rollbackFor = RuntimeException.class)
+
     public ResultVO creatOrder(@RequestBody LogisticsOrder order) {
         ResultVO result = new ResultVO();
         result.setCode(200);
@@ -60,8 +58,8 @@ public class LogisticsOrderController {
      * @param id
      * @return
      */
-    @GetMapping("/v1/ order")
-    public ResultVO getOrder(@RequestParam("id") String id){
+    @GetMapping("/v1/order/{id}")
+    public ResultVO getOrder(@PathVariable("id") long id){
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(200);
         resultVO.setData(service.getById(id));
@@ -73,8 +71,9 @@ public class LogisticsOrderController {
      * @param id
      * @return
      */
-    @DeleteMapping("/order")
-    public ResultVO deleteOrder(@RequestParam("id") String id){
+    @DeleteMapping("/v1/order/{id}")
+    @Transactional(rollbackFor = RuntimeException.class)
+    public ResultVO deleteOrder(@PathVariable("id") long id){
         ResultVO result = new ResultVO();
         result.setCode(200);
         result.setData(service.removeById(id));
@@ -95,7 +94,8 @@ public class LogisticsOrderController {
      * @param order
      * @return
      */
-    @PutMapping("/order")
+    @PutMapping("/v1/order")
+    @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO updateOrder(@RequestBody LogisticsOrder order){
         ResultVO result = new ResultVO();
         result.setCode(200);

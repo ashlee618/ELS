@@ -11,6 +11,7 @@ import com.example.elsorder.service.impl.LogisticsOrderServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -35,7 +36,8 @@ public class LogisticsOrderPackageController {
      * @param orderPackage
      * @return
      */
-    @PostMapping("orderPackage")
+    @PostMapping("/v1/orderPackage")
+    @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO creatOrderItem (@RequestBody LogisticsOrderPackage orderPackage){
         ResultVO result = new ResultVO();
         result.setCode(200);
@@ -56,8 +58,8 @@ public class LogisticsOrderPackageController {
      * @param id
      * @return
      */
-    @GetMapping("/orderPackage")
-    public ResultVO getOrder(@RequestParam("id") String id){
+    @GetMapping("/v1/orderPackage/{id}")
+    public ResultVO getOrder(@PathVariable("id") long id){
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(200);
         resultVO.setData(service.getById(id));
@@ -69,8 +71,9 @@ public class LogisticsOrderPackageController {
      * @param id
      * @return
      */
-    @DeleteMapping("/orderPackage")
-    public ResultVO deleteOrder(@RequestParam("id") String id){
+    @DeleteMapping("/v1/orderPackage/{id}")
+    @Transactional(rollbackFor = RuntimeException.class)
+    public ResultVO deleteOrder(@PathVariable("id") long id){
         ResultVO result = new ResultVO();
         result.setCode(200);
 
@@ -91,11 +94,11 @@ public class LogisticsOrderPackageController {
      * @param Package
      * @return
      */
-    @PutMapping("/orderPackage")
+    @PutMapping("/v1/orderPackage")
+    @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO updateOrder(@RequestBody LogisticsOrderPackage Package){
         ResultVO result = new ResultVO();
         result.setCode(200);
-
         boolean update = false;
         logger.info("开始更新订单Package");
         try{

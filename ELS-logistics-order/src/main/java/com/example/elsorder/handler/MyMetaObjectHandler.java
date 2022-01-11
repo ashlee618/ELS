@@ -14,7 +14,6 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        log.info("开始自动填充-插入");
         this.setFieldValByName("gmtCreated",new Date(),metaObject);
         this.setFieldValByName("gmtModified",new Date(),metaObject);
         this.setFieldValByName("isDelete",0,metaObject);
@@ -26,7 +25,6 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     // 更新时的填充策略
     @Override
     public void updateFill(MetaObject metaObject) {
-        log.info("开始自动填充-更新");
         this.setFieldValByName("gmtModified",new Date(),metaObject);
     }
 }

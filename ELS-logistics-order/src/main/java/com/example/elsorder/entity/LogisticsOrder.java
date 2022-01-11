@@ -1,8 +1,12 @@
 package com.example.elsorder.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,9 +23,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="LogisticsOrderPackage对象", description="")
-@KeySequence(value = "SEQ_ORACLE_STRING_KEY", clazz = String.class)
-public class LogisticsOrderPackage implements Serializable {
+@ApiModel(value="LogisticsOrder对象", description="")
+public class LogisticsOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -92,14 +95,33 @@ public class LogisticsOrderPackage implements Serializable {
     @ApiModelProperty(value = "买家ID")
     private Long buyerId;
 
+    @ApiModelProperty(value = "买家昵称")
+    private String buyerName;
+
     @ApiModelProperty(value = "卖家ID")
     private Long sellerId;
 
-    @ApiModelProperty(value = "店铺ID")
-    private Long shopId;
+    @ApiModelProperty(value = "卖家昵称")
+    private String sellerName;
+
+    @ApiModelProperty(value = "父物流单号")
+    private String parentLgOrderCode;
+
+    @ApiModelProperty(value = "业务类型")
+    private String bizType;
+
+    @ApiModelProperty(value = "订单来源")
+    private Integer orderOrigin;
+
+    @ApiModelProperty(value = "订单类型")
+    private Integer orderType;
+
+    @ApiModelProperty(value = "状态")
+    @TableField(fill = FieldFill.INSERT)
+    private Integer status;
 
     @ApiModelProperty(value = "运单号")
-    private String mailNo;
+    private String mailno;
 
     @ApiModelProperty(value = "快递公司编码")
     private String expressCode;
@@ -107,22 +129,15 @@ public class LogisticsOrderPackage implements Serializable {
     @ApiModelProperty(value = "快递公司名称")
     private String expressName;
 
-    @ApiModelProperty(value = "包裹类型")
-    private Integer packageType;
-
-    @ApiModelProperty(value = "状态")
-    @TableField(fill = FieldFill.INSERT)
-    private Integer status;
-
-    @ApiModelProperty(value = "扩展字段")
-    private String feature;
-
     @ApiModelProperty(value = "是否删除")
     @TableField(fill = FieldFill.INSERT)
     @TableLogic
     private Integer isDelete;
 
-    @ApiModelProperty(value = "版本号")
+    @ApiModelProperty(value = "扩展字段，JSON格式")
+    private String feature;
+
+    @ApiModelProperty(value = "版本号，用于乐观锁")
     @TableField(fill = FieldFill.INSERT)
     @Version
     private Integer version;
@@ -131,7 +146,7 @@ public class LogisticsOrderPackage implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreated;
 
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty(value = "编辑时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 

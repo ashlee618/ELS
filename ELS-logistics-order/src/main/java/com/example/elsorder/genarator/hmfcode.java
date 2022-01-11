@@ -81,7 +81,7 @@ public class hmfcode {
         mpg.setPackageInfo(pc);
         //4、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("logistics_order_package");
+        strategy.setInclude("logistics_order_package","logistics_order","logistics_order_item");
         // 设置要映射的表名
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);

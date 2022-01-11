@@ -1,8 +1,10 @@
 package com.example.elsorder;
 
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.example.elsorder.Utils.SnowflakeIdUtils;
 import com.example.elsorder.entity.LogisticsOrderPackage;
 import com.example.elsorder.mapper.LogisticsOrderPackageMapper;
 import com.example.elsorder.service.impl.LogisticsOrderPackageServiceImpl;
@@ -52,5 +54,19 @@ class ElsOrderApplicationTests {
         System.out.println(mapper.update(logisticsOrderPackage,queryWrapper));
 //        service.updateById(logisticsOrderPackage);
     }
+    @Test
+    void TestSnow(){
+
+        SnowflakeIdUtils snowflakeIdUtils = new SnowflakeIdUtils(1, 1);
+        System.out.println(snowflakeIdUtils.nextId());
+        System.out.println(snowflakeIdUtils.nextId());
+    }
+//927986 328577384448
+//927986 328577384449
+//927986 892308619264
+//927986 892308619265
+
+
+
 
 }

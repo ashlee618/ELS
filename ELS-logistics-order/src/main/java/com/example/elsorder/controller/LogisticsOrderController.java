@@ -4,59 +4,63 @@ package com.example.elsorder.controller;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.example.elslogisticscommon.entry.ResultVO;
 import com.example.elsorder.entity.LogisticsOrder;
-import com.example.elsorder.entity.LogisticsOrderItem;
 import com.example.elsorder.entity.LogisticsOrderPackage;
-import com.example.elsorder.service.impl.LogisticsOrderPackageServiceImpl;
 import com.example.elsorder.service.impl.LogisticsOrderServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.ResultSet;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 洪敏锋
- * @since 2022-01-02
+ * @since 2022-01-04
  */
 @RestController
-@RequestMapping("/logistics-order-package")
-public class LogisticsOrderPackageController {
+@RequestMapping("/logistics-order")
+public class LogisticsOrderController {
+    @Autowired
+    public TransactionTemplate transactionTemplate;
+
 
     @Autowired
-    public LogisticsOrderPackageServiceImpl service;
+    public LogisticsOrderServiceImpl service;
 
-    public static final Logger logger = LoggerFactory.getLogger(LogisticsOrderPackageController.class);
-
+    public static final Logger logger = LoggerFactory.getLogger(LogisticsOrderController.class);
     /***
-     * 创建订单Package
-     * @param orderPackage
+     * 创建订单
+     * @param order
      * @return
      */
-    @PostMapping("orderPackage")
-    public ResultVO creatOrderItem (@RequestBody LogisticsOrderPackage orderPackage){
+    @PostMapping("/v1/order")
+    public ResultVO creatOrder(@RequestBody LogisticsOrder order) {
         ResultVO result = new ResultVO();
         result.setCode(200);
         boolean save = false;
-        logger.info("开始创建订单Package");
+        logger.info("开始创建订单");
         try{
-            save = service.save(orderPackage);
-            logger.info("创建订单Package完成,id:{}",orderPackage.getId());
+            save = service.save(order);
+            logger.info("创建订单完成,id:{}",order.getId());
         }catch (Exception e){
-            logger.error("创建订单Package失败,id:{}",orderPackage.getId(),e);
+            logger.error("创建订单失败,id:{}",order.getId(),e);
         }
         result.setMsg(save == true ? "true" : "false");
         return result;
     }
 
     /***
-     * 查询订单Package
+     * 查询订单
      * @param id
      * @return
      */
-    @GetMapping("/orderPackage")
+    @GetMapping("/v1/ order")
     public ResultVO getOrder(@RequestParam("id") String id){
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(200);
@@ -65,44 +69,43 @@ public class LogisticsOrderPackageController {
     }
 
     /***
-     * 删除订单Package
+     * 删除订单
      * @param id
      * @return
      */
-    @DeleteMapping("/orderPackage")
+    @DeleteMapping("/order")
     public ResultVO deleteOrder(@RequestParam("id") String id){
         ResultVO result = new ResultVO();
         result.setCode(200);
-
+        result.setData(service.removeById(id));
         boolean delete = false;
-        logger.info("开始删除订单Package");
+        logger.info("开始删除订单");
         try{
             delete = service.removeById(id);
-            logger.info("删除订单Package完成,id:{}",id);
+            logger.info("删除订单完成,id:{}",id);
         }catch (Exception e){
-            logger.error("删除订单Package失败,id:{}",id,e);
+            logger.error("删除订单失败,id:{}",id,e);
         }
         result.setMsg(delete == true ? "true" : "false");
         return result;
     }
 
     /***
-     * 更新订单Package
-     * @param Package
+     * 更新订单
+     * @param order
      * @return
      */
-    @PutMapping("/orderPackage")
-    public ResultVO updateOrder(@RequestBody LogisticsOrderPackage Package){
+    @PutMapping("/order")
+    public ResultVO updateOrder(@RequestBody LogisticsOrder order){
         ResultVO result = new ResultVO();
         result.setCode(200);
-
         boolean update = false;
-        logger.info("开始更新订单Package");
+        logger.info("开始更新订单");
         try{
-            update = service.updateById(Package);
-            logger.info("更新订单Package完成,id:{}",Package.getId());
+            update = service.updateById(order);
+            logger.info("更新订单完成,id:{}",order.getId());
         }catch (Exception e){
-            logger.error("更新订单Package失败,id:{}",Package.getId(),e);
+            logger.error("更新订单失败,id:{}",order.getId(),e);
         }
         result.setMsg(update == true ? "true" : "false");
         return result;

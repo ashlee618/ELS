@@ -20,6 +20,7 @@
         <module>ELS-logistics-address</module>
         <module>ELS-logistics-order</module>
         <module>ELS-logistics-user</module>
+        <module>ELS-logistics-common</module>
     </modules>
 
     <description>Demo project for Spring Boot</description>
@@ -31,12 +32,19 @@
         <nacos.version>2.2.7.RELEASE</nacos.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
         <velocity.version>2.3</velocity.version>
+        <ELS-common.version>0.0.1-SNAPSHOT</ELS-common.version>
     </properties>
 
 
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>ELS-logistics-common</artifactId>
+                <version>${ELS-common.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>

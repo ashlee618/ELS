@@ -1,4 +1,4 @@
-package com.example.elsorder.configuaration;
+package com.example.elsaddress.configuaration;
 
 
 import com.example.elslogisticscommon.utils.SnowflakeIdUtils;
@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.example.elsorder.mapper")
 public class Config {
     /***
      * 雪花算法生成器

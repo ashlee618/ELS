@@ -1,4 +1,4 @@
-package com.example.elsorder.Utils;
+package com.example.elslogisticscommon.utils;
  
 /**
  * @Author：JCccc

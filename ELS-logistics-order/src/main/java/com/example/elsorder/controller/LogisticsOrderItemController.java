@@ -21,7 +21,7 @@ import java.sql.ResultSet;
  * @since 2022-01-04
  */
 @RestController
-@RequestMapping("/logistics-order-item")
+@RequestMapping("/logistics-order-item/v1")
 @Transactional()
 public class LogisticsOrderItemController {
 
@@ -35,7 +35,7 @@ public class LogisticsOrderItemController {
      * @param item
      * @return
      */
-    @PostMapping("/v1/orderItem")
+    @PostMapping("/orderItem")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO creatOrderItem (@RequestBody LogisticsOrderItem item){
         ResultVO result = new ResultVO();
@@ -57,7 +57,7 @@ public class LogisticsOrderItemController {
      * @param id
      * @return
      */
-    @GetMapping("/v1/orderItem/{id}")
+    @GetMapping("/orderItem/{id}")
     public ResultVO getOrder(@PathVariable("id") long id){
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(200);
@@ -70,7 +70,7 @@ public class LogisticsOrderItemController {
      * @param id
      * @return
      */
-    @DeleteMapping("/v1/orderItem/{id}")
+    @DeleteMapping("/orderItem/{id}")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO deleteOrder(@PathVariable("id") long id){
         ResultVO result = new ResultVO();
@@ -92,7 +92,7 @@ public class LogisticsOrderItemController {
      * @param item
      * @return
      */
-    @PutMapping("/v1/orderItem")
+    @PutMapping("/orderItem")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO updateOrder(@RequestBody LogisticsOrderItem item){
         ResultVO result = new ResultVO();

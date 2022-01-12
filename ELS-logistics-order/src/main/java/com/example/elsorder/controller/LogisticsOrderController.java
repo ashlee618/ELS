@@ -24,7 +24,7 @@ import java.sql.ResultSet;
  * @since 2022-01-04
  */
 @RestController
-@RequestMapping("/logistics-order")
+@RequestMapping("/logistics-order/v1")
 public class LogisticsOrderController {
     @Autowired
     public LogisticsOrderServiceImpl service;
@@ -34,10 +34,10 @@ public class LogisticsOrderController {
      * 创建订单
      * @param order
      * @return
+     *
      */
-    @PostMapping("/v1/order")
+    @PostMapping("/order")
     @Transactional(rollbackFor = RuntimeException.class)
-
     public ResultVO creatOrder(@RequestBody LogisticsOrder order) {
         ResultVO result = new ResultVO();
         result.setCode(200);
@@ -71,7 +71,7 @@ public class LogisticsOrderController {
      * @param id
      * @return
      */
-    @DeleteMapping("/v1/order/{id}")
+    @DeleteMapping("/order/{id}")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO deleteOrder(@PathVariable("id") long id){
         ResultVO result = new ResultVO();
@@ -94,7 +94,7 @@ public class LogisticsOrderController {
      * @param order
      * @return
      */
-    @PutMapping("/v1/order")
+    @PutMapping("/order")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO updateOrder(@RequestBody LogisticsOrder order){
         ResultVO result = new ResultVO();

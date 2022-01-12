@@ -3,8 +3,7 @@ package com.example.elsorder;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.example.elsorder.Utils.SnowflakeIdUtils;
+import com.example.elslogisticscommon.utils.SnowflakeIdUtils;
 import com.example.elsorder.entity.LogisticsOrderPackage;
 import com.example.elsorder.mapper.LogisticsOrderPackageMapper;
 import com.example.elsorder.service.impl.LogisticsOrderPackageServiceImpl;

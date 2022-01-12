@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-01-02
  */
 @RestController
-@RequestMapping("/logistics-order-package")
+@RequestMapping("/logistics-order-package/v1")
 public class LogisticsOrderPackageController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class LogisticsOrderPackageController {
      * @param orderPackage
      * @return
      */
-    @PostMapping("/v1/orderPackage")
+    @PostMapping("/orderPackage")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO creatOrderItem (@RequestBody LogisticsOrderPackage orderPackage){
         ResultVO result = new ResultVO();
@@ -58,7 +58,7 @@ public class LogisticsOrderPackageController {
      * @param id
      * @return
      */
-    @GetMapping("/v1/orderPackage/{id}")
+    @GetMapping("/orderPackage/{id}")
     public ResultVO getOrder(@PathVariable("id") long id){
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(200);
@@ -71,7 +71,7 @@ public class LogisticsOrderPackageController {
      * @param id
      * @return
      */
-    @DeleteMapping("/v1/orderPackage/{id}")
+    @DeleteMapping("/orderPackage/{id}")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO deleteOrder(@PathVariable("id") long id){
         ResultVO result = new ResultVO();
@@ -94,7 +94,7 @@ public class LogisticsOrderPackageController {
      * @param Package
      * @return
      */
-    @PutMapping("/v1/orderPackage")
+    @PutMapping("/orderPackage")
     @Transactional(rollbackFor = RuntimeException.class)
     public ResultVO updateOrder(@RequestBody LogisticsOrderPackage Package){
         ResultVO result = new ResultVO();
